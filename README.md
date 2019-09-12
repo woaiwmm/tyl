@@ -8,3 +8,6 @@
 - **Mybatis-PageHelper分页助手**
 - **配置Spring、SpringMVC**
 - **配置logback日志输出**
+- **安装PE助手和Restlet Client
+(工欲善其事必先利其器)**
+#### 2019.9.12 用户模块开发
