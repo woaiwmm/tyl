@@ -21,6 +21,7 @@ import javax.servlet.http.HttpSession;
 public class UserController {
     @Autowired
     private IUserService userService;
+
     /**
      * 用户登录
      * @param username
@@ -39,4 +40,78 @@ public class UserController {
         }
         return response;
     }
+
+    /**
+     * 用户退出
+     * @param session
+     * @return
+     */
+    @RequestMapping("loginout.do")
+    @ResponseBody
+    public ServerResponse<String> loginout(HttpSession session){
+        session.removeAttribute(Const.CURRENT_USER);
+        return ServerResponse.createBySuccess();
+    }
+
+    /**
+     * 用户注册
+     * @param user
+     * @return
+     */
+    @RequestMapping("register.do")
+    @ResponseBody
+    public ServerResponse<String> register(User user){
+        return userService.register(user);
+    }
+
+    /**
+     * 校验用户名和邮箱是否存在
+     * @param str
+     * @param type
+     * @return
+     */
+    @RequestMapping("check_valid.do")
+    @ResponseBody
+    public ServerResponse<String> checkValid(String str,String type) {
+    return userService.checkValid(str,type);
+    }
+
+    /**
+     * 获取用户登录信息
+     * @param session
+     * @return
+     */
+    @RequestMapping("get_user_info.do")
+    @ResponseBody
+    public ServerResponse<User> getUserInfo(HttpSession session){
+        User user= (User) session.getAttribute(Const.CURRENT_USER);
+        if (user!=null){
+            return ServerResponse.createBySuccess(user);
+        }
+        return ServerResponse.createByErrorMessage("用户未登录，无法获取当前用户的信息");
+    }
+
+    /**
+     *通过账号获取设置的问题
+     * @param username
+     * @return
+     */
+    @RequestMapping("forget_get_question.do")
+    @ResponseBody
+    public ServerResponse<String> forgetGetQuestion(String username) {
+       return userService.forgetGetQuestion(username);
+    }
+
+    /**
+     * 比较问题与答案是否匹配
+     * @param username
+     * @param answer
+     * @return
+     */
+    @RequestMapping("forget_check_answer.do")
+    @ResponseBody
+    public ServerResponse<String> forgetCheckAnswer(String username,String question,String answer){
+        return userService.checkAnswer(username,question,answer);
+    }
+
 }
