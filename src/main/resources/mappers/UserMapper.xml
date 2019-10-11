@@ -153,13 +153,31 @@
   </update>
   
   <select id="checkUsername" resultType="int" parameterType="String">
-    SELECT count(1) FROM tyl_user
+    SELECT count(1)
+    FROM tyl_user
     WHERE  username =#{username}
   </select>
   <select id="selectLogin" resultMap="BaseResultMap" parameterType="map">
     SELECT
     <include refid="Base_Column_List" />
-    FROM username=#{username}
+    FROM tyl_user
+    WHERE username=#{username}
     AND  password=#{password}
+  </select>
+  <select id="checkEmail" resultType="int" parameterType="String">
+    SELECT count(1) FROM tyl_user
+    WHERE  email =#{email}
+  </select>
+  <select id="selectQuestionByUsername" resultType="string" parameterType="String">
+    SELECT question
+    FROM tyl_user
+    WHERE  username = #{username}
+  </select>
+  <select id="checkAnswer" resultType="int" parameterType="map">
+    SELECT COUNT(1)
+    FROM tyl_user
+    WHERE  username = #{username}
+    AND question=#{question}
+    AND answer=#{answer}
   </select>
 </mapper>
