@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.TimeUnit;
 
-/**
+/**Token的缓存类
  * @author Administrator
  * @date 2019-10-11 22:19
  */
@@ -16,6 +16,7 @@ public class TokenCache {
     //todo 这个类没搞懂
 
     private static Logger logger = LoggerFactory.getLogger(TokenCache.class);
+    public static final String TOKEN_PREFIX="token_";
 
     //LRU算法 最小清除算法
     private static LoadingCache<String, String> localCache = CacheBuilder.newBuilder()
