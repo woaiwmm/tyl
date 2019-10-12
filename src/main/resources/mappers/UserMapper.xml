@@ -180,4 +180,21 @@
     AND question=#{question}
     AND answer=#{answer}
   </select>
+<update id="updatePasswordByUsername"  parameterType="map">
+UPDATE tyl_user
+SET password=#{passwordNew}
+where username=#{username},update_time=now()
+</update>
+  <select id="checkPassword" resultType="int" parameterType="map">
+    SELECT COUNT(1)
+    FROM tyl_user
+    WHERE id=#{userId}
+    and password=#{password}
+  </select>
+  <select id="checkEmailByUserId" resultType="int" parameterType="map">
+   SELECT count(1)
+   FROM tyl_user
+   WHERE  email =#{email}
+   and id!={userId}
+  </select>
 </mapper>

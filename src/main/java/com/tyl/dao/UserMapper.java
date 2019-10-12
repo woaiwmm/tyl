@@ -2,6 +2,7 @@ package com.tyl.dao;
 
 import com.tyl.pojo.User;
 import org.apache.ibatis.annotations.Param;
+import org.omg.PortableInterceptor.Interceptor;
 
 public interface UserMapper {
     int deleteByPrimaryKey(Integer id);
@@ -51,4 +52,28 @@ public interface UserMapper {
      * @return
      */
     int checkAnswer(@Param("username") String username,@Param("question") String question,@Param("answer") String answer);
+
+    /**
+     * 修改密码
+     * @param username
+     * @param passwordNew
+     * @return
+     */
+   int updatePasswordByUsername(@Param("username")String username,@Param("passwordNew")String passwordNew);
+
+    /**
+     * 校验密码是否为该登录用户的
+     * @param password
+     * @param userId
+     * @return
+     */
+   int checkPassword(@Param("password")String password,@Param("userId")Integer userId);
+
+    /**
+     * 校验需要更新的email是否存在
+     * @param email
+     * @param userId
+     * @return
+     */
+   int checkEmailByUserId(@Param("email")String email, @Param("userId")Integer userId);
 }
