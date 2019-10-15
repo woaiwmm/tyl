@@ -1,6 +1,7 @@
 package com.tyl.controller.portal;
 
 import com.tyl.common.Const;
+import com.tyl.common.ResponseCode;
 import com.tyl.common.ServerResponse;
 import com.tyl.pojo.User;
 import com.tyl.service.IUserService;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpSession;
 
 /**
+ * 前台用户
  * @author Jun
  * @date 2019-09-12 14:48
  */
@@ -159,7 +161,7 @@ public class UserController {
     @ResponseBody
     public ServerResponse<User> update_information(HttpSession session,User user){
         User currentUser = (User) session.getAttribute(Const.CURRENT_USER);
-        if (user==null){
+        if (currentUser==null){
             return ServerResponse.createByErrorMessage("用户未登录");
         }
         user.setId(currentUser.getId());
@@ -169,5 +171,20 @@ public class UserController {
             session.setAttribute(Const.CURRENT_USER,response.getData());
         }
         return response;
+    }
+
+    /**
+     * 获得用户的信息
+     * @param session
+     * @return
+     */
+    @RequestMapping("get_information.do")
+    @ResponseBody
+    public ServerResponse<User> get_information(HttpSession session){
+        User currentUser = (User) session.getAttribute(Const.CURRENT_USER);
+        if (currentUser==null){
+            return ServerResponse.createByErrorcodeMessage(ResponseCode.NEED_LOGIN.getCode(),"未登录,需要强制登录status=10");
+        }
+        return userService.getInformation(currentUser.getId());
     }
 }
