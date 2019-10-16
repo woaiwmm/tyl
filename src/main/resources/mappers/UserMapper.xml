@@ -195,6 +195,6 @@ where username=#{username},update_time=now()
    SELECT count(1)
    FROM tyl_user
    WHERE  email =#{email}
-   and id!={userId}
+   and id!=#{userId}
   </select>
 </mapper>

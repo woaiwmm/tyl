@@ -152,7 +152,7 @@ public class UserController {
     }
 
     /**
-     * 更新个人信息
+     * 更新个人信息,不能更新用户名
      * @param session
      * @param user
      * @return
@@ -166,7 +166,7 @@ public class UserController {
         }
         user.setId(currentUser.getId());
         user.setUsername(currentUser.getUsername());
-        ServerResponse<User> response = userService.updateInformation(currentUser);
+        ServerResponse<User> response = userService.updateInformation(user);
         if (response.isSuccess()){
             session.setAttribute(Const.CURRENT_USER,response.getData());
         }
