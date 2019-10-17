@@ -7,7 +7,6 @@ import java.io.Serializable;
 
 /**
  * 该类的作用是提供高复用的前后端交互数据对象
- *
  * @author Administrator
  * @date 2019-09-12 15:03
  */
