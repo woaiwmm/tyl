@@ -26,7 +26,6 @@ public class UserController {
 
     /**
      * 用户登录
-     *
      * @param username
      * @param password
      * @param session
@@ -84,7 +83,6 @@ public class UserController {
 
     /**
      * 获取用户登录信息
-     *
      * @param session
      * @return
      */
