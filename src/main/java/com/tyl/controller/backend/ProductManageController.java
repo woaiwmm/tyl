@@ -71,7 +71,7 @@ public class ProductManageController {
 
 
     /**
-     * 获取商品
+     * 获取商品详情
      * @param session
      * @param productId
      * @return
@@ -84,7 +84,7 @@ public class ProductManageController {
             return ServerResponse.createByErrorcodeMessage(ResponseCode.NEED_LOGIN.getCode(), "用户未登录，请登录管理");
         }
         if (userService.checkAdminRole(user).isSuccess()){
-
+            return productService.manageProductDetail(productId);
         }else {
             return ServerResponse.createByErrorMessage("无权限操作");
         }
