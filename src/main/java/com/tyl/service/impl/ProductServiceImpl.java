@@ -1,5 +1,8 @@
 package com.tyl.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.google.common.collect.Lists;
 import com.tyl.common.ResponseCode;
 import com.tyl.common.ServerResponse;
 import com.tyl.dao.CategoryMapper;
@@ -10,9 +13,12 @@ import com.tyl.service.IProductService;
 import com.tyl.util.DateTimeUtil;
 import com.tyl.util.PropertiesUtil;
 import com.tyl.vo.ProductDetailVo;
+import com.tyl.vo.ProductListVo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @author Administrator
@@ -107,4 +113,36 @@ public class ProductServiceImpl implements IProductService {
         productDetailVo.setUpdateTime(DateTimeUtil.dateToStr(product.getUpdateTime()));
         return productDetailVo;
     }
+
+//    todo 这个是PageHelper的使用，没搞懂
+    public ServerResponse<PageInfo> getProductList(int pageNum,int pageSize){
+        //startPage--start
+        PageHelper.startPage(pageNum,pageSize);
+        //填充自己的sql查询逻辑
+        List<Product> productList=productMapper.selectList();
+        List<ProductListVo> productListVoList= Lists.newArrayList();
+        for (Product product:productList){
+            ProductListVo productListVo = assembleProductListo(product);
+            productListVoList.add(productListVo);
+        }
+        //pageHelper收尾
+        PageInfo pageResult=new PageInfo(productList);
+        pageResult.setList(productListVoList);
+        return ServerResponse.createBySuccess(pageResult);
+    }
+
+
+    private ProductListVo assembleProductListo(Product product) {
+        ProductListVo productListVo=new ProductListVo();
+        productListVo.setCategoryId(product.getCategoryId());
+        productListVo.setId(product.getId());
+        productListVo.setName(product.getName());
+        productListVo.setPrice(product.getPrice());
+        productListVo.setSubtitle(product.getSubtitle());
+        productListVo.setStatus(product.getStatus());
+        productListVo.setMainImage(product.getMainImage());
+        productListVo.setImageHost(PropertiesUtil.getProperty("ftp.server.http.prefix"));
+        return productListVo;
+    }
+
 }
