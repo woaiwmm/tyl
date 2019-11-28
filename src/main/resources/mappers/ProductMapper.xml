@@ -182,4 +182,18 @@
     FROM tyl_product
     ORDER  BY id ASC
   </select>
+  <select id="selectByNameAndProductId" resultMap="BaseResultMap" parameterType="map">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM tyl_product
+    <where>
+      <if test="productName!=null">
+        AND name like #{productName}
+      </if>
+      <if test="productId!=null">
+        and id=#{productId}
+      </if>
+    </where>
+
+  </select>
 </mapper>
