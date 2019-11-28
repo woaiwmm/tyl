@@ -2,6 +2,7 @@ package com.tyl.service;
 
 import com.tyl.common.ServerResponse;
 import com.tyl.pojo.Product;
+import com.tyl.vo.ProductDetailVo;
 
 /**
  * @author Administrator
@@ -10,4 +11,5 @@ import com.tyl.pojo.Product;
 public interface IProductService {
      ServerResponse saveOrUpdateProduct(Product product) ;
      ServerResponse<String> setSaleStatus(Integer productId,Integer status);
-    }
+     ServerResponse<ProductDetailVo> manageProductDetail(Integer productId);
+}

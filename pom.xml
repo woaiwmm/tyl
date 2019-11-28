@@ -20,6 +20,13 @@
 
   <dependencies>
 
+    <!-- Tomcat服务器下解决跨域问题的工具包 -->
+    <dependency>
+      <groupId>com.thetransactioncompany</groupId>
+      <artifactId>cors-filter</artifactId>
+      <version>2.5</version>
+    </dependency>
+
     <dependency>
       <groupId>org.apache.tomcat</groupId>
       <artifactId>tomcat-servlet-api</artifactId>
@@ -141,6 +148,7 @@
       <!--<scope>test</scope>-->
     </dependency>
 
+    <!--时间格式化工具-->
     <dependency>
       <groupId>joda-time</groupId>
       <artifactId>joda-time</artifactId>
