@@ -12,7 +12,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -141,5 +143,15 @@ public class ProductManageController {
         }
     }
 
+    /**
+     * 图片上传
+     * @param file
+     * @param request
+     * @return
+     */
+    public ServerResponse upload(MultipartFile file, HttpServletRequest request){
+        String path=request.getSession().getServletContext().getRealPath("upload");
+
+    }
 
 }
