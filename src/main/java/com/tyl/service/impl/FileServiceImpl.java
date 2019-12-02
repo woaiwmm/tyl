@@ -1,8 +1,11 @@
 package com.tyl.service.impl;
 
+import com.google.common.collect.Lists;
 import com.tyl.service.IFileService;
+import com.tyl.util.FTPUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -13,6 +16,7 @@ import java.util.UUID;
  * @author Administrator
  * @date 2019-11-29 8:47
  */
+@Service("iFileService")
 public class FileServiceImpl implements IFileService {
     private Logger logger = LoggerFactory.getLogger(FileServiceImpl.class);
 
@@ -37,11 +41,12 @@ public class FileServiceImpl implements IFileService {
         }
         File targetFile = new File(path, uploadFileName);
         try {
-            //文件以及上传成功
+            //file already upload success
             file.transferTo(targetFile);
-
-            //todo 将targeFile上传到我们的FTP服务器
-            //todo 上传完之后，删除存放路径下面的文件
+            //file already upload to FTPServer
+            FTPUtil.uploadFile(Lists.newArrayList(targetFile));
+            //after upload success,delete save's file
+            targetFile.delete();
         } catch (IOException e) {
             logger.error("上传文件异常",e);
             return null;
