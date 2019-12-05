@@ -9,6 +9,17 @@
      http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
      http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
+    <!--配置applicationContext.xml的作用
+1、激活bean（service层）
+
+2、配置数据源
+
+3、配置事务管理器
+
+4、配置Mybatis工厂（同时加载mybatis核心配置文件）
+
+5、配置mapper文件
+-->
     <context:component-scan base-package="com.tyl" annotation-config="true"/>
 
     <!--<context:annotation-config/>-->

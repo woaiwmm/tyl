@@ -2,7 +2,6 @@ package com.tyl.dao;
 
 import com.tyl.pojo.User;
 import org.apache.ibatis.annotations.Param;
-import org.omg.PortableInterceptor.Interceptor;
 
 public interface UserMapper {
     int deleteByPrimaryKey(Integer id);
