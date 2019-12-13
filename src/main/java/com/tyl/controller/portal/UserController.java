@@ -35,8 +35,6 @@ public class UserController {
     @RequestMapping(value = "login.do")
     @ResponseBody
     public ServerResponse<User> login(String username, String password, HttpSession session) {
-//        service-->Mybatis-->dao
-//        todo 没有搞懂这里的逻辑
         ServerResponse<User> response = userService.login(username, password);
         if (response.isSuccess()) {//登录成功
             session.setAttribute(Const.CURRENT_USER, response.getData());
@@ -59,7 +57,6 @@ public class UserController {
 
     /**
      * 用户注册
-     *
      * @param user
      * @return
      */
