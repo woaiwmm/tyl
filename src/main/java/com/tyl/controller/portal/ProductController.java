@@ -29,7 +29,7 @@ public class ProductController {
      * @param productId
      * @return
      */
-    @RequestMapping("detail")
+    @RequestMapping("detail.do")
     @ResponseBody
     public ServerResponse<ProductDetailVo> detail(Integer productId){
        return productService.getProductDetail(productId);
@@ -45,7 +45,7 @@ public class ProductController {
      * @param orderBy
      * @return
      */
-    @RequestMapping("list")
+    @RequestMapping("list.do")
     @ResponseBody
     public ServerResponse<PageInfo> list(@RequestParam(value = "keyword",required = false)String keyword,@RequestParam(value = "categoryId",required = false)Integer categoryId,
                                          @RequestParam(value = "pageNum",defaultValue = "1") int pageNum,@RequestParam(value = "pageSize",defaultValue = "10") int pageSize,
