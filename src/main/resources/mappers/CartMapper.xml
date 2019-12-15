@@ -136,7 +136,7 @@
     and checked=0
   </select>
     <delete id="deleteByUserIdProductIds" parameterType="map">
-        DELETE FROM tyl_
+        DELETE FROM tyl_cart
         WHERE user_id=#{userId}
         <if test="productIdList!=null">
             and product_id in
