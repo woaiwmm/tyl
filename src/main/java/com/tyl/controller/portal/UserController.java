@@ -42,13 +42,14 @@ public class UserController {
         return response;
     }
 
+
     /**
      * 用户退出
      *
      * @param session
      * @return
      */
-    @RequestMapping("loginout.do")
+    @RequestMapping("logout.do")
     @ResponseBody
     public ServerResponse<String> loginout(HttpSession session) {
         session.removeAttribute(Const.CURRENT_USER);
